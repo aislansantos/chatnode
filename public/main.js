@@ -17,6 +17,10 @@ function renderUserList(){
  userList.forEach(item => ul.innerHTML += `<li>${item}</li>`)
 };
 
+function addMessage(type, user, msg){
+    
+}
+
 loginInput.addEventListener("keyup", (e) => {
     if (e.keyCode === 13) {
         let name = loginInput.value.trim();

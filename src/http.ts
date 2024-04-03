@@ -11,7 +11,7 @@ const io = new Server(serverHttp);
 
 server.use(express.static(path.join(__dirname, "../public")));
 
-const connectedUsers: string[] = [];
+let connectedUsers: string[] = [];
 
 io.on("connection", (socket) => {
     console.log("Conexão detectada ...");
@@ -27,6 +27,17 @@ io.on("connection", (socket) => {
             list: connectedUsers
         });
     });
+
+    socket.on("disconnect", () => {
+        connectedUsers = connectedUsers.filter(user => user !== (socket as any).username)
+        console.log(connectedUsers);
+
+        socket.broadcast.emit("list-update", {
+            left: (socket as any).username,
+            list: connectedUsers
+        })
+
+    })
 });
 
 server.use((req: Request, res: Response) => {
