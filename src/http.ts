@@ -11,10 +11,22 @@ const io = new Server(serverHttp);
 
 server.use(express.static(path.join(__dirname, "../public")));
 
-const connectedUsers = 
+const connectedUsers: string[] = [];
 
 io.on("connection", (socket) => {
     console.log("Conexão detectada ...");
+
+    socket.on("join-request", (username) => {
+        (socket as any).username = username;
+        connectedUsers.push(username);
+        console.log(connectedUsers);
+
+        socket.emit("user-ok", connectedUsers);
+        socket.broadcast.emit("list-update", {
+            joined: username,
+            list: connectedUsers
+        });
+    });
 });
 
 server.use((req: Request, res: Response) => {
