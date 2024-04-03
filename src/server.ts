@@ -1,14 +1,3 @@
-import express, { Request, Response } from "express";
-import path from "path";
+import { serverHttp } from "./http";
 
-const server = express();
-
-server.use(express.static(path.join(__dirname, "../public")));
-
-server.use((req: Request, res: Response) => {
-    res.status(404);
-    res.json({ error: 'Endpoint não encontrado.' });
-});
-
-
-server.listen(3000);
+serverHttp.listen(3000, () => console.log("Server rodando na porta 3000"));
