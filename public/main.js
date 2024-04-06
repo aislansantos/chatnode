@@ -52,12 +52,12 @@ socket.on("user-ok", (list) => {
 });
 
 socket.on("list-update", (data) => {
-    if(data.joined){
+    if (data.joined) {
         addMessage("status", null, `${data.joined} entrou no chat.`);
     }
-    
-    if(data.left){
-        addMessage("status", null, `${data.joined} saiu no chat.`);
+
+    if (data.left) {
+        addMessage("status", null, `${data.left} saiu do chat.`);
     }
 
     userList = data.list;
