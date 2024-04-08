@@ -46,6 +46,7 @@ textInput.addEventListener("keyup", (e) => {
         textInput.value = "";
 
         if (txt !== "") {
+            addMessage("msg", username, txt); // Dessa forma estamos usando um retorno para o proprio usuario localmente, sem o emit do servidor.
             socket.emit("send-msg", txt);
         }
     }

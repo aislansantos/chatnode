@@ -45,7 +45,7 @@ io.on("connection", (socket) => {
             message: txt
         };
         
-        socket.emit("show-msg", obj);
+        // socket.emit("show-msg", obj); // Estamos usando um retorno do usuario via local
         socket.broadcast.emit("show-msg", obj);
     })
 });
